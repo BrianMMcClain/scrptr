@@ -22,5 +22,7 @@ var server = http.createServer(function(req, res) {onRequest(req, res)}).listen(
 
 var scrptr = new Scrptr();
 scrptr.addFunction("H", function(args){var date = new Date(); return date.getHours();});
-scrptr.addFunction("H", function(args){var date = new Date(); return date.getHours();});
-scrptr.eval("The time is %H %M %AMPM");
+scrptr.addFunction("M", function(args){var date = new Date(); return date.getHours();});
+
+// Sample testing code
+scrptr.eval("The time is %H %M %AMPM . It is currently %TEMP{94101} degrees Fahrenheit");
