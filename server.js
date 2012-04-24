@@ -40,8 +40,8 @@ function onScriptPOST(req, res){
 function onRequest(req, res){
 	switch(req.url){
 		case '/' :
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.write("Welcome to SCRPTR");
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write("<html><body><h1>Welcome to SCRPTR</h1><p>Check <a href=\"https://github.com/BrianMMcClain/scrptr\">here</a> for more details</p></body></html>");
 			res.end();
 			break;
 		case '/s' :
