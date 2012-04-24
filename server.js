@@ -20,13 +20,16 @@ function onScriptPOST(req, res){
 	});
 	
 	req.on('end', function(){
+		console.log("[Eval] " + buffer);
 		scrptr.eval(buffer, function(error, data){
 			res.writeHead(200, {'Content-Type': 'text/plain'});
 			if (error){
 				res.write(error);
+				console.log("[Error] " + error);
 			}
 			else{
 				res.write(data);
+				console.log("[Result] " + data);
 			}
 			
 			res.end();
