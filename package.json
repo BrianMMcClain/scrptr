@@ -1,0 +1,8 @@
+{
+    "name": "scrptr",
+    "version": "0.0.1",
+    "description": "Scrptr",
+    "dependencies": {
+		"restler": ""
+    }
+}
