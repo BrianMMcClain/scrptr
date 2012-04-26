@@ -15,7 +15,11 @@ scrptr.addFunction("TEMP", function(args, cb){
 	rest.get(url).on('complete', function(data){
 		var parser = new xml2js.Parser();
 		parser.parseString(data, function(err, jdata){
-			cb(jdata["weather"]["current_conditions"]["temp_f"]["@"].data);
+			try{
+				cb(jdata["weather"]["current_conditions"]["temp_f"]["@"].data);
+			} catch(err){
+				cb("ERROR")
+			}
 		});
 	});
 }, "Get the current temperature in fahrenheit for {AREA_CODE}");
