@@ -1,13 +1,24 @@
 var http = require('http');
+var rest = require('restler');
+var xml2js = require('xml2js');
 var Scrptr = require('./lib/scrptr').Scrptr;
 
 var PORT = process.env.VCAP_APP_PORT || 3000;
 
 var scrptr = new Scrptr();
-scrptr.addFunction("H", function(args){var date = new Date(); return date.getUTCHours();}, "Get the current hour of the time of day in UTC");
-scrptr.addFunction("M", function(args){var date = new Date(); return date.getUTCMinutes();}, "Get the current minute of the time of day in UTC");
-scrptr.addFunction("AMPM", function(args){var date = new Date(); if (date.getUTCHours() > 11){return "PM"} else {return "AM"}}, "Determines if the current time is in AM or PM in UTC");
-scrptr.addFunction("TEMP", function(args){return args}, "Get the current temperature in fahrenheit for {AREA_CODE}");
+scrptr.addFunction("H", function(args, cb){var date = new Date(); cb(date.getUTCHours())}, "Get the current hour of the time of day in UTC");
+scrptr.addFunction("M", function(args, cb){var date = new Date(); cb(date.getUTCMinutes())}, "Get the current minute of the time of day in UTC");
+scrptr.addFunction("AMPM", function(args, cb){var date = new Date(); if (date.getUTCHours() > 11){  cb("PM") } else { cb("AM") }}, "Determines if the current time is in AM or PM in UTC");
+
+scrptr.addFunction("TEMP", function(args, cb){
+	var url = "http://www.google.com/ig/api?weather=" + args;
+	rest.get(url).on('complete', function(data){
+		var parser = new xml2js.Parser();
+		parser.parseString(data, function(err, jdata){
+			cb(jdata["weather"]["current_conditions"]["temp_f"]["@"].data);
+		});
+	});
+}, "Get the current temperature in fahrenheit for {AREA_CODE}");
 
 function onScriptPOST(req, res){
 	
