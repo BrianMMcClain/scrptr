@@ -21,5 +21,5 @@ Come visit us at [scrptr.cloudfoundry.com](http://scrptr.cloudfoundry.com)
 
 Right now, the service can be easily used with cURL while a nice looking UI is built. You can see an example of this by running:
 ```
-curl -d "The time is %H %M %AMPM . It is currently %TEMP{94101} degrees Fahrenheit" http://scrptr.cloudfoundry.com/s
+curl -d "The time is %H %M %AMPM . It is currently %TEMP{94102} degrees Fahrenheit" http://scrptr.cloudfoundry.com/s
 ```
