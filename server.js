@@ -35,6 +35,18 @@ function onScriptPOST(req, res){
 	});
 }
 
+function onFunctionsRequest(req, res){
+	var keys = scrptr.getFunctionNames();
+	var out = "";
+	for (var i = 0; i < keys.length; i++){
+		out += keys[i] + " - " + scrptr.getFunction(keys[i]).description + "<br />";
+	}
+	
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.write(out);
+	res.end();
+}
+
 function onRequest(req, res){
 	switch(req.url){
 		case '/' :
@@ -57,6 +69,9 @@ function onRequest(req, res){
 				res.write("Page Not Found");
 				res.end();
 			}
+			break;
+		case '/functions':
+			onFunctionsRequest(req, res);
 			break;
 		default :
 			res.writeHead(404, {'Content-Type': 'text/plain'});
