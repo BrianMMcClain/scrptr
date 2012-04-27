@@ -23,3 +23,5 @@ Right now, the service can be easily used with cURL while a nice looking UI is b
 ```
 curl -d "The time is %H %M %AMPM . It is currently %TEMP{94102} degrees Fahrenheit" http://scrptr.cloudfoundry.com/s
 ```
+
+A list of functions available on the example service can be found [here](http://scrptr.cloudfoundry.com/functions)
